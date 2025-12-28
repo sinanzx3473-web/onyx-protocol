@@ -1,0 +1,232 @@
+// Prisma schema for DEX Analytics API
+// Database: PostgreSQL 16 on Supabase
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model - tracks registered users and their preferences
+model User {
+  id              String   @id @default(cuid())
+  address         String   @unique // Ethereum address
+  email           String?  @unique
+  username        String?  @unique
+  notificationPreferences Json? // Stores notification settings
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  lastLoginAt     DateTime?
+  
+  alerts          Alert[]
+  orders          Order[]
+  
+  @@index([address])
+  @@index([email])
+}
+
+// Order model - tracks user orders (limit/stop orders)
+model Order {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userAddress     String   // Denormalized for quick queries
+  fromToken       String   // Token address to sell
+  toToken         String   // Token address to buy
+  fromAmount      String   // BigInt as string - amount to sell
+  targetPrice     String   // Decimal as string - desired price
+  minReceived     String   // BigInt as string - minimum tokens to receive
+  orderType       String   // "limit" or "stop"
+  status          String   // "open", "filled", "cancelled", "expired"
+  expiryTime      DateTime // When order expires
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  filledAt        DateTime? // When order was filled
+  txHash          String?  // Transaction hash when filled
+  filledAmount    String?  // BigInt as string - actual amount received
+  signature       String   // User signature for relay execution
+  nonce           String   // Unique nonce for signature
+  
+  @@index([userId])
+  @@index([userAddress])
+  @@index([status])
+  @@index([expiryTime])
+  @@index([fromToken, toToken])
+}
+
+// Alert model - tracks price alerts and notifications
+model Alert {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userAddress     String   // Denormalized for quick queries
+  tokenAddress    String   // Token to monitor
+  tokenSymbol     String   // Token symbol for display
+  alertType       String   // "price_above", "price_below", "volume_spike"
+  targetValue     String   // Target price or volume threshold
+  currentValue    String?  // Last checked value
+  isActive        Boolean  @default(true)
+  isTriggered     Boolean  @default(false)
+  triggeredAt     DateTime?
+  notificationSent Boolean @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([userId])
+  @@index([userAddress])
+  @@index([isActive])
+  @@index([isTriggered])
+  @@index([tokenAddress])
+}
+
+// Chain Configuration - stores supported blockchain networks
+model ChainConfig {
+  id              String   @id @default(cuid())
+  chainId         Int      @unique
+  name            String
+  rpcUrl          String
+  explorerUrl     String
+  nativeCurrency  Json     // {name, symbol, decimals}
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([chainId])
+  @@index([isActive])
+}
+
+// Pool model - tracks liquidity pools
+model Pool {
+  id            String   @id @default(cuid())
+  pairAddress   String   @unique
+  token0Address String
+  token0Symbol  String
+  token0Name    String
+  token1Address String
+  token1Symbol  String
+  token1Name    String
+  reserve0      String   // BigInt as string
+  reserve1      String   // BigInt as string
+  totalSupply   String   // BigInt as string
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  swaps         Swap[]
+  lpPositions   LPPosition[]
+  liquidityPositions LiquidityPosition[]
+  liquidityEvents    LiquidityEvent[]
+
+  @@index([token0Address, token1Address])
+  @@index([pairAddress])
+}
+
+// Swap model - tracks individual swap transactions
+model Swap {
+  id              String   @id @default(cuid())
+  txHash          String   @unique
+  poolId          String
+  pool            Pool     @relation(fields: [poolId], references: [id])
+  sender          String
+  recipient       String
+  amount0In       String   // BigInt as string
+  amount1In       String   // BigInt as string
+  amount0Out      String   // BigInt as string
+  amount1Out      String   // BigInt as string
+  timestamp       DateTime
+  blockNumber     Int
+  gasUsed         String   // BigInt as string
+  gasPrice        String   // BigInt as string
+  
+  @@index([poolId])
+  @@index([timestamp])
+  @@index([sender])
+}
+
+// LP Position model - tracks liquidity provider positions
+model LPPosition {
+  id              String   @id @default(cuid())
+  poolId          String
+  pool            Pool     @relation(fields: [poolId], references: [id])
+  userAddress     String
+  lpTokenBalance  String   // BigInt as string
+  share           Float    // Percentage share of pool
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([poolId, userAddress])
+  @@index([userAddress])
+  @@index([poolId])
+}
+
+// Analytics snapshot - stores 24h aggregated data
+model AnalyticsSnapshot {
+  id              String   @id @default(cuid())
+  timestamp       DateTime @default(now())
+  totalVolume24h  String   // BigInt as string
+  totalFees24h    String   // BigInt as string
+  totalTVL        String   // BigInt as string
+  uniqueUsers24h  Int
+  swapCount24h    Int
+  
+  @@index([timestamp])
+}
+
+// Limit Order model - tracks user limit/stop orders
+model LimitOrder {
+  id              String   @id @default(cuid())
+  userAddress     String
+  fromToken       String   // Token address to sell
+  toToken         String   // Token address to buy
+  fromAmount      String   // BigInt as string - amount to sell
+  targetPrice     String   // Decimal as string - desired price (toToken per fromToken)
+  minReceived     String   // BigInt as string - minimum tokens to receive
+  orderType       String   // "limit" or "stop"
+  status          String   // "open", "filled", "cancelled", "expired"
+  expiryTime      DateTime // When order expires
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  filledAt        DateTime? // When order was filled
+  txHash          String?  // Transaction hash when filled
+  filledAmount    String?  // BigInt as string - actual amount received
+  signature       String   // User signature for relay execution
+  nonce           String   // Unique nonce for signature
+  
+  @@index([userAddress])
+  @@index([status])
+  @@index([expiryTime])
+  @@index([fromToken, toToken])
+}
+
+// Liquidity Position model - tracks individual LP positions with detailed info
+model LiquidityPosition {
+  id        String   @id @default(cuid())
+  poolId    String
+  pool      Pool     @relation(fields: [poolId], references: [id])
+  owner     String
+  liquidity String   // BigInt as string
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([poolId])
+  @@index([owner])
+}
+
+// Liquidity Event model - tracks add/remove liquidity events
+model LiquidityEvent {
+  id          String   @id @default(cuid())
+  poolId      String
+  pool        Pool     @relation(fields: [poolId], references: [id])
+  type        String   // "ADD" or "REMOVE"
+  amount0     String   // BigInt as string
+  amount1     String   // BigInt as string
+  timestamp   DateTime @default(now())
+  txHash      String
+  userAddress String
+
+  @@index([poolId])
+  @@index([timestamp])
+  @@index([userAddress])
+}

@@ -1,0 +1,25 @@
+/* Custom RainbowKit Button Styles */
+button[data-testid="rk-connect-button"] {
+  background-color: #D4AF37 !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+}
+
+button[data-testid="rk-connect-button"]:hover {
+  background-color: rgba(212, 175, 55, 0.9) !important;
+}
+
+/* Account button when connected */
+button[data-testid="rk-account-button"] {
+  background-color: transparent !important;
+  border: 2px solid #D4AF37 !important;
+  color: #D4AF37 !important;
+  font-weight: 700 !important;
+  transition: all 0.3s ease !important;
+}
+
+button[data-testid="rk-account-button"]:hover {
+  background-color: rgba(212, 175, 55, 0.1) !important;
+}
