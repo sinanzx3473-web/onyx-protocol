@@ -1,0 +1,77 @@
+# Batch update commands for test files
+# Run these sed commands one by one
+
+# ComprehensiveCoverage.t.sol
+sed -i 's/new DexCore(address(factory), address(weth))/new DexCore(address(factory), address(weth), address(forwarder))/g' test/ComprehensiveCoverage.t.sol
+sed -i 's/new DEXRouter(address(factory), address(weth))/new DEXRouter(address(factory), address(weth), address(forwarder))/g' test/ComprehensiveCoverage.t.sol
+sed -i 's/new FlashSwap(address(dexCore))/new FlashSwap(address(dexCore), address(forwarder))/g' test/ComprehensiveCoverage.t.sol
+
+# DEXPairFeeOnTransfer.t.sol
+sed -i 's/new DEXRouter(address(factory), weth)/new DEXRouter(address(factory), weth, address(forwarder))/g' test/DEXPairFeeOnTransfer.t.sol
+
+# DEXRouter.t.sol
+sed -i 's/new DEXRouter(address(factory), address(weth))/new DEXRouter(address(factory), address(weth), address(forwarder))/g' test/DEXRouter.t.sol
+
+# EventEmission.t.sol
+sed -i 's/new DexCore(address(this), address(weth))/new DexCore(address(this), address(weth), address(forwarder))/g' test/EventEmission.t.sol
+
+# FeeOnTransferToken.t.sol
+sed -i 's/new DexCore(factory, weth)/new DexCore(factory, weth, address(forwarder))/g' test/FeeOnTransferToken.t.sol
+
+# FlashLoanFeeDistribution.t.sol
+sed -i 's/new DexCore(factory, weth)/new DexCore(factory, weth, address(forwarder))/g' test/FlashLoanFeeDistribution.t.sol
+sed -i 's/new FlashSwap(address(dexCore))/new FlashSwap(address(dexCore), address(forwarder))/g' test/FlashLoanFeeDistribution.t.sol
+
+# FlashLoanHardening.t.sol
+sed -i 's/new DexCore(factory, weth)/new DexCore(factory, weth, address(forwarder))/g' test/FlashLoanHardening.t.sol
+sed -i 's/new FlashSwap(address(dexCore))/new FlashSwap(address(dexCore), address(forwarder))/g' test/FlashLoanHardening.t.sol
+
+# FlashSwap.t.sol
+sed -i 's/new DexCore(factory, weth)/new DexCore(factory, weth, address(forwarder))/g' test/FlashSwap.t.sol
+sed -i 's/new FlashSwap(address(dexCore))/new FlashSwap(address(dexCore), address(forwarder))/g' test/FlashSwap.t.sol
+
+# FuzzTests.t.sol
+sed -i 's/new DexCore(address(factory), address(weth))/new DexCore(address(factory), address(weth), address(forwarder))/g' test/FuzzTests.t.sol
+sed -i 's/new DEXRouter(address(factory), address(weth))/new DEXRouter(address(factory), address(weth), address(forwarder))/g' test/FuzzTests.t.sol
+
+# GasOptimization.t.sol
+sed -i 's/new DexCore(address(factory), address(weth))/new DexCore(address(factory), address(weth), address(forwarder))/g' test/GasOptimization.t.sol
+sed -i 's/new DEXRouter(address(factory), address(weth))/new DEXRouter(address(factory), address(weth), address(forwarder))/g' test/GasOptimization.t.sol
+
+# GovernanceTimelock.t.sol
+sed -i 's/new DexCore(address(factory), address(weth))/new DexCore(address(factory), address(weth), address(forwarder))/g' test/GovernanceTimelock.t.sol
+sed -i 's/new FlashSwap(address(dexCore))/new FlashSwap(address(dexCore), address(forwarder))/g' test/GovernanceTimelock.t.sol
+
+# IntegrationTests.t.sol
+sed -i 's/new DexCore(address(factory), address(weth))/new DexCore(address(factory), address(weth), address(forwarder))/g' test/IntegrationTests.t.sol
+sed -i 's/new DEXRouter(address(factory), address(weth))/new DEXRouter(address(factory), address(weth), address(forwarder))/g' test/IntegrationTests.t.sol
+sed -i 's/new FlashSwap(address(dexCore))/new FlashSwap(address(dexCore), address(forwarder))/g' test/IntegrationTests.t.sol
+
+# LPToken.t.sol
+sed -i 's/new DexCore(factory, address(weth))/new DexCore(factory, address(weth), address(forwarder))/g' test/LPToken.t.sol
+
+# LiquidityFlows.t.sol
+sed -i 's/new DexCore(address(factory), address(weth))/new DexCore(address(factory), address(weth), address(forwarder))/g' test/LiquidityFlows.t.sol
+
+# LowSeverityFixes.t.sol
+sed -i 's/new DexCore(address(this), address(weth))/new DexCore(address(this), address(weth), address(forwarder))/g' test/LowSeverityFixes.t.sol
+sed -i 's/new FlashSwap(address(dexCore))/new FlashSwap(address(dexCore), address(forwarder))/g' test/LowSeverityFixes.t.sol
+sed -i 's/new DexCore(address(0), address(weth))/new DexCore(address(0), address(weth), address(forwarder))/g' test/LowSeverityFixes.t.sol
+sed -i 's/new DexCore(address(this), address(0))/new DexCore(address(this), address(0), address(forwarder))/g' test/LowSeverityFixes.t.sol
+sed -i 's/new FlashSwap(address(0))/new FlashSwap(address(0), address(forwarder))/g' test/LowSeverityFixes.t.sol
+
+# PermitIntegration.t.sol
+sed -i 's/new DexCore(address(factory), address(weth))/new DexCore(address(factory), address(weth), address(forwarder))/g' test/PermitIntegration.t.sol
+
+# ProtocolFeeCap.t.sol
+sed -i 's/new DexCore(address(0x1234), address(weth))/new DexCore(address(0x1234), address(weth), address(forwarder))/g' test/ProtocolFeeCap.t.sol
+
+# RegressionTests.t.sol
+sed -i 's/new DexCore(address(factory), address(weth))/new DexCore(address(factory), address(weth), address(forwarder))/g' test/RegressionTests.t.sol
+sed -i 's/new DEXRouter(address(factory), address(dexCore))/new DEXRouter(address(factory), address(dexCore), address(forwarder))/g' test/RegressionTests.t.sol
+
+# SlippageProtection.t.sol
+sed -i 's/new DEXRouter(address(factory), address(weth))/new DEXRouter(address(factory), address(weth), address(forwarder))/g' test/SlippageProtection.t.sol
+
+# SqrtPrecision.t.sol
+sed -i 's/new DexCore(address(0x1234), address(weth))/new DexCore(address(0x1234), address(weth), address(forwarder))/g' test/SqrtPrecision.t.sol
