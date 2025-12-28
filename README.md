@@ -1,249 +1,285 @@
-# 🌑 ONYX Protocol - The Diamond Protocol
+# ONYX
 
+A fully accessible, production-ready decentralized exchange built with modern web technologies and blockchain integration.
 
-**Tagline:** Silence is Luxury - The First AI-Native Liquidity Protocol
+![ONYX](https://img.shields.io/badge/Built%20with-CodeNut-purple)
+![WCAG AA](https://img.shields.io/badge/WCAG-AA%20Compliant-green)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-[![Built with CodeNut](https://img.shields.io/badge/Built%20with-CodeNut%20AI-gold)](https://codenut.ai)
-[![Security Audit](https://img.shields.io/badge/Audit%20Score-A%2B%20(100%2F100)-brightgreen)]()
-[![Production Ready](https://img.shields.io/badge/Status-Production%20Ready-success)]()
+## Features
 
-## 🎯 Overview
+### Core Functionality
+- **Token Swapping**: Instant token exchanges with slippage protection
+- **Liquidity Provision**: Add/remove liquidity and earn trading fees
+- **Pool Analytics**: Comprehensive pool metrics and performance tracking
+- **Flash Loans**: Advanced flash loan functionality with safety checks
+- **Account Management**: Transaction history and LP position tracking
 
-ONYX Protocol is a revolutionary DeFi super-application that combines AI-powered portfolio management, gasless transactions, institutional-grade arbitrage tools, and multi-chain liquidity aggregation into a single, elegant interface.
+### Accessibility & UX
+- ✅ **WCAG 2.1 Level AA Compliant**: Full keyboard navigation and screen reader support
+- ✅ **Dark Mode**: System preference detection with manual toggle
+- ✅ **Responsive Design**: Optimized for mobile, tablet, and desktop (320px+)
+- ✅ **Touch Targets**: Minimum 44×44px for all interactive elements
+- ✅ **High Contrast**: 4.5:1 text contrast ratio, 3:1 for UI components
+- ✅ **Focus Management**: Clear focus indicators and modal focus trapping
+- ✅ **Error Boundaries**: Graceful error handling across the application
 
-**The Problem:** Current DeFi platforms force users to navigate complex routing, pay high gas fees, manually search for arbitrage opportunities, and lack intelligent automation.
+### Developer Experience
+- **TypeScript**: Full type safety across the codebase
+- **React 18**: Modern React with hooks and concurrent features
+- **Vite**: Lightning-fast development and optimized builds
+- **Tailwind CSS**: Utility-first styling with design tokens
+- **Wagmi & RainbowKit**: Best-in-class Web3 wallet integration
+- **Playwright**: Comprehensive E2E testing including accessibility tests
 
-**The Solution:** ONYX leverages AI agents to orchestrate complex strategies through natural language, eliminates gas friction with relayer-powered "Ghost Mode," and provides institutional tools accessible to everyone.
+## Quick Start
 
-## ✨ Key Features
+### Prerequisites
+- Node.js 18+ and pnpm
+- A Web3 wallet (MetaMask, Rainbow, etc.)
+- Test tokens for development
 
-### 🤖 The Concierge (AI Portfolio Manager)
-- Natural language DeFi execution
-- "Execute arbitrage on ETH/USDC" → AI handles routing, gas, execution
-- Powered by advanced intent-solving algorithms
+### Installation
 
-### 👻 Ghost Mode (Gasless Transactions)
-- Zero gas fees for trading and liquidity provision
-- Relayer network covers transaction costs instantly
-- Seamless UX - trade without holding ETH
+```bash
+# Clone the repository
+git clone https://github.com/your-org/codenut-dex.git
+cd codenut-dex
 
-### ⚡ Flash Vaults (Institutional Arbitrage)
-- One-click flash loan execution up to $10M
-- Real-time arbitrage opportunity scanner
-- Multi-DEX price inefficiency detection
-- Sub-second execution (<400ms)
+# Install dependencies
+pnpm install
 
-### 🔮 Neural Command Deck
-- AI terminal for advanced protocol interaction
-- Voice commands for trading (future)
-- Autonomous strategy execution
-- Real-time market intelligence
+# Copy environment variables
+cp .env.example .env
 
-### 🌉 Additional Features
-- **Swap (The Reactor):** Optimal routing across 50+ DEXs
-- **Liquidity Pools:** Earn yield with single-click LP management
-- **Multi-Chain Native:** Ethereum, Polygon, Arbitrum, Optimism, Base
-- **DAO Governance:** Decentralized protocol control
-- **Portfolio Analytics:** Real-time P&L tracking
-- **Advanced Alerts:** Price sentinels, whale tracking, gas monitoring
-
-## 🏗️ Technical Architecture
-
-### Frontend Stack
-```typescript
-- React 18 + TypeScript (Strict Mode)
-- Vite (Build Tool) with manual chunking
-- Tailwind CSS (Glassmorphism UI)
-- Framer Motion (Animations)
-- Wagmi v2 + Viem + RainbowKit (Web3)
-- TanStack Query (State Management)
-- Lightweight Charts (Trading Terminal)
+# Start development server
+pnpm dev
 ```
 
-### Backend Stack
-```typescript
-- Node.js + Express
-- PostgreSQL + Prisma ORM
-- Redis (Rate Limiting & Caching)
-- Swagger/OpenAPI (Documentation)
-- Zod (Input Validation)
+### Environment Variables
+
+```env
+# Network selection (devnet, testnet, mainnet)
+VITE_CHAIN=devnet
+
+# RPC endpoints
+VITE_RPC_URL=https://your-rpc-endpoint
+
+# Contract addresses (auto-loaded from metadata.json)
 ```
 
-### Smart Contracts
-```solidity
-- Solidity 0.8.x
-- Foundry (Development Framework)
-- OpenZeppelin (Security Standards)
-- ERC-20, ERC-3156 (Flash Loans)
-- EIP-712 (Typed Signatures)
+## Development
+
+### Available Scripts
+
+```bash
+# Development
+pnpm dev              # Start dev server
+pnpm build            # Build for production
+pnpm preview          # Preview production build
+
+# Testing
+pnpm test:e2e         # Run E2E tests
+pnpm test:a11y        # Run accessibility tests
+
+# Code Quality
+pnpm lint             # Lint code
+pnpm type-check       # TypeScript type checking
 ```
 
-### Infrastructure
-- Multi-chain deployment (EVM-compatible)
-- Decentralized relayer network
-- Oracle integration (Chainlink, API3)
-- IPFS for decentralized hosting
+### Project Structure
 
-## 🚀 Performance Metrics
+```
+codenut-dex/
+├── src/
+│   ├── components/       # React components
+│   │   ├── ui/          # Reusable UI primitives
+│   │   ├── swap/        # Swap-specific components
+│   │   ├── liquidity/   # Liquidity components
+│   │   └── flash/       # Flash loan components
+│   ├── pages/           # Page components
+│   ├── utils/           # Utility functions
+│   ├── hooks/           # Custom React hooks
+│   └── App.tsx          # Root component
+├── contracts/           # Smart contracts
+│   └── interfaces/      # Contract ABIs and metadata
+├── e2e/                 # E2E tests
+├── docs/                # Documentation
+│   ├── ACCESSIBILITY.md # Accessibility audit
+│   └── ONBOARDING.md    # User guide
+└── public/              # Static assets
+```
 
-- **Bundle Size:** <800KB initial load
-- **Load Time:** <2s on 4G networks
-- **TPS Capacity:** 1000+ concurrent users tested
-- **Security Score:** A+ (100/100)
-- **Test Coverage:** 100% (28 test suites)
-- **Uptime:** 99.9% (Production-ready)
+## Accessibility
 
-## 🔒 Security Features
+ONYX is built with accessibility as a core principle. See [ACCESSIBILITY.md](./docs/ACCESSIBILITY.md) for detailed information.
 
-- ✅ Non-custodial architecture (users control keys)
-- ✅ Timelock governance (48hr delay on critical changes)
-- ✅ Flash loan fee caps (max 0.1%)
-- ✅ Oracle manipulation protection (TWAP)
-- ✅ MEV protection via relayer network
-- ✅ Rate limiting (100 req/min per IP)
-- ✅ Input sanitization (Zod validation)
-- ✅ Smart contract audits (Foundry + Manual review)
+### Keyboard Navigation
+- **Tab/Shift+Tab**: Navigate between elements
+- **Enter/Space**: Activate buttons and links
+- **Escape**: Close modals and dialogs
+- **Arrow Keys**: Navigate within menus and tabs
 
-## 📊 Smart Contract Addresses
+### Screen Reader Support
+- Tested with NVDA, JAWS, VoiceOver, and TalkBack
+- Semantic HTML and ARIA attributes throughout
+- Live regions for dynamic content updates
+- Descriptive labels and error messages
 
-### Ethereum Sepolia Testnet
-OnyxRouter:        0x... (To be deployed)
-FlashLoanVault:    0x... (To be deployed)
-GovernanceDAO:     0x... (To be deployed)
-ONYX Token:        0x... (To be deployed)
+### Visual Accessibility
+- WCAG AA color contrast ratios
+- Clear focus indicators (2px purple ring)
+- Dark mode with system preference detection
+- Resizable text up to 200% without loss of functionality
 
-*Note: Contracts deployment-ready, awaiting mainnet launch*
+## Testing
 
-## 🎬 Demo & Resources
+### E2E Testing
 
-- **Live Demo:** https://onyx.codenut.xyz
-- **Demo Video:** https://youtu.be/neOrrCxeKPg
-- **Documentation:** docs.onyxprotocol.io
-- **GitHub:** github.com/sinanzx3473-web/onyx-protocol
+```bash
+# Run all E2E tests
+pnpm test:e2e
 
-## 🎨 Design Philosophy
+# Run accessibility tests only
+pnpm test:e2e e2e/accessibility.spec.ts
 
-**Visual Identity:** "Silence is Luxury"
-- Black & Gold color palette (Obsidian + 24k Gold)
-- Cinematic sci-fi aesthetic
-- Holographic UI elements
-- Smooth, premium animations
-- Minimal noise, maximum clarity
+# Run in UI mode
+pnpm test:e2e --ui
 
-**UX Principles:**
-- Complexity hidden, simplicity revealed
-- One-click interactions where possible
-- Progressive disclosure of advanced features
-- Accessible to beginners, powerful for experts
+# Run specific browser
+pnpm test:e2e --project=chromium
+```
 
-## 🛠️ Built With CodeNut AI
+### Accessibility Testing
 
-ONYX Protocol was built in **72 hours** using CodeNut's revolutionary Vibe Coding technology:
+Our accessibility test suite covers:
+- Keyboard navigation flows
+- ARIA labels and roles
+- Focus management
+- Screen reader announcements
+- Touch target sizes
+- Color contrast
+- Modal accessibility
 
-### What CodeNut Enabled:
-1. **Smart Contract Generation:** Natural language → Production Solidity
-   - "Create a flash loan vault with 0.09% fee and security guards"
-   - CodeNut generated full contract with OpenZeppelin imports
-   - Automatic security analysis caught vulnerabilities
+### Manual Testing Checklist
 
-2. **Frontend Development:** Conversational UI creation
-   - "Build a luxury DeFi swap interface with glassmorphism"
-   - CodeNut scaffolded React components with Tailwind
-   - Generated responsive, animated interfaces
+Before each release:
+- [ ] Test keyboard-only navigation
+- [ ] Verify screen reader compatibility
+- [ ] Check color contrast with tools
+- [ ] Test on mobile devices
+- [ ] Verify all forms and validation
+- [ ] Test error states and boundaries
+- [ ] Verify network switching
+- [ ] Test wallet connection/disconnection
 
-3. **Backend Infrastructure:** API generation from descriptions
-   - "Create REST API for liquidity pool analytics"
-   - CodeNut built Express routes with Swagger docs
-   - Included rate limiting and error handling
+## Deployment
 
-4. **Multi-Chain Deployment:** One-click deployment wizard
-   - Selected networks: Ethereum, Polygon, Arbitrum
-   - CodeNut handled contract verification
-   - Configured RPC endpoints automatically
+### Building for Production
 
-5. **Testing & Security:** AI-powered analysis
-   - Automated test generation (Vitest + Forge)
-   - Security vulnerability scanning
-   - Performance optimization suggestions
+```bash
+# Build optimized production bundle
+pnpm build
 
-### Development Timeline:
-Hour 0-12:  Concept design & architecture planning
-Hour 12-24: Smart contract generation with CodeNut
-Hour 24-48: Frontend development via Vibe Coding
-Hour 48-60: Backend API & database setup
-Hour 60-72: Integration, testing, deployment
+# Preview production build locally
+pnpm preview
+```
 
-**Without CodeNut:** This project would require 3-6 months with a full team.
-**With CodeNut:** Solo developer, 72 hours, production-ready.
+### Performance Targets
+- **Lighthouse Score**: 90+ across all categories
+- **LCP (Largest Contentful Paint)**: < 2.0s
+- **TTI (Time to Interactive)**: < 3.0s
+- **CLS (Cumulative Layout Shift)**: < 0.1
+- **FID (First Input Delay)**: < 100ms
 
-## 🗺️ Roadmap
+### Network Configuration
 
-### Phase 1: Foundation (Completed ✅)
-- Core swap functionality
-- Liquidity pool management
-- Basic governance
-- Ghost Mode prototype
+The app supports multiple networks:
+- **Devnet**: Local development and testing
+- **Testnet**: Public testnet (Sepolia, Goerli, etc.)
+- **Mainnet**: Production Ethereum mainnet
 
-### Phase 2: Intelligence (Q1 2026)
-- Full AI Concierge deployment
-- Voice command integration
-- Predictive trading strategies
-- Cross-chain bridge (Warp Gate)
+Network selection persists across sessions and can be changed via the Network Settings dialog.
 
-### Phase 3: Expansion (Q2 2026)
-- Futures trading terminal (1x-100x leverage)
-- Options protocol
-- NFT liquidity pools
-- Fiat on-ramp integration
+## User Guide
 
-### Phase 4: Ecosystem (Q3 2026)
-- ONYX DAO full decentralization
-- Protocol SDK for developers
-- Mobile app (iOS/Android)
-- Institutional partnerships
+For end-user documentation, see [ONBOARDING.md](./docs/ONBOARDING.md).
 
-## 👥 Team
+Topics covered:
+- Connecting your wallet
+- Network selection
+- Trading tokens
+- Providing liquidity
+- Using flash loans
+- Managing your account
+- Troubleshooting
 
-**Solo Developer:** Ali Sinan
-- Full-stack blockchain developer
-- Built with CodeNut AI platform
+## Smart Contracts
 
-**Note:** This is one of the independent submissions demonstrating CodeNut's versatility in building different Web3 applications (see also: 0xZERO - Nation-State Infrastructure).
+### Contract Integration
 
-## 📜 License
+The app integrates with the following contracts:
+- **DEX Router**: Token swapping logic
+- **Liquidity Pool**: AMM liquidity provision
+- **Flash Swap**: ERC-3156 flash loan implementation
 
-MIT License - Open Source
+Contract metadata is automatically loaded from `contracts/interfaces/metadata.json`.
 
-Copyright (c) 2025 ONYX Protocol
+### Security Features
+- Borrower whitelist for flash loans
+- Slippage protection on swaps
+- Maximum loan size limits
+- Reentrancy guards
+- Comprehensive error handling
 
-## 🤝 Contributing
+## Contributing
 
-ONYX Protocol is open-source and welcomes contributions! 
+We welcome contributions! Please follow these guidelines:
 
-Areas for contribution:
-- Additional DEX integrations
-- UI/UX improvements
-- Smart contract optimizations
-- Documentation translations
-- Bug reports and fixes
+1. **Fork the repository** and create a feature branch
+2. **Follow code style**: Use ESLint and Prettier configs
+3. **Write tests**: Add E2E tests for new features
+4. **Check accessibility**: Ensure WCAG AA compliance
+5. **Update docs**: Document new features and changes
+6. **Submit PR**: Provide clear description of changes
 
-## 📞 Contact
+### Code Style
+- Use TypeScript for all new code
+- Follow existing component patterns
+- Add ARIA labels to interactive elements
+- Ensure keyboard accessibility
+- Maintain color contrast ratios
+- Add loading and error states
 
-- **Email:** sinanzx3473@gmail.com
-- **Twitter:** @Sinan1078425
-- **Telegram:** @sinox006
+## Browser Support
 
-## 🙏 Acknowledgments
+- Chrome/Edge 90+
+- Firefox 88+
+- Safari 14+
+- Mobile browsers (iOS Safari 14+, Chrome Android 90+)
 
-- **CodeNut AI** - For revolutionary Vibe Coding platform
-- **OpenZeppelin** - Smart contract security standards
-- **Uniswap** - DEX protocol inspiration
-- **Chainlink** - Oracle infrastructure
+## License
+
+MIT License - see [LICENSE](./LICENSE) for details.
+
+## Support
+
+- **Documentation**: See [docs/](./docs) directory
+- **Issues**: [GitHub Issues](https://github.com/your-org/codenut-dex/issues)
+- **Accessibility**: accessibility@codenut.dev
+- **General Support**: support@codenut.dev
+
+## Acknowledgments
+
+Built with:
+- [React](https://react.dev)
+- [Vite](https://vitejs.dev)
+- [Tailwind CSS](https://tailwindcss.com)
+- [Wagmi](https://wagmi.sh)
+- [RainbowKit](https://rainbowkit.com)
+- [Radix UI](https://radix-ui.com)
+- [Playwright](https://playwright.dev)
 
 ---
 
-**Built with CodeNut AI | CodeNut Global Vibe Hackathon 2025**
-
-*"Where silence is luxury. Where AI meets DeFi. Where institutional-grade tools are accessible to everyone."*
-
-© 2050 ONYX PROTOCOL. All rights reserved.
+**Built with CodeNut** | Version 1.0.0 | [Accessibility Statement](./docs/ACCESSIBILITY.md)

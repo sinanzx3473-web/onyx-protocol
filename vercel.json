@@ -1,0 +1,74 @@
+{
+  "buildCommand": "pnpm run build",
+  "outputDirectory": "dist",
+  "devCommand": "pnpm run dev",
+  "installCommand": "pnpm install",
+  "framework": "vite",
+  "env": {
+    "VITE_CHAIN": {
+      "description": "Target blockchain network (mainnet, sepolia, arbitrum, optimism, base, polygon)",
+      "value": "sepolia"
+    },
+    "VITE_WALLETCONNECT_PROJECT_ID": {
+      "description": "WalletConnect Project ID from https://cloud.walletconnect.com/"
+    },
+    "VITE_API_URL": {
+      "description": "Backend API URL (optional)",
+      "value": ""
+    },
+    "VITE_ENABLE_FLASH_SWAPS": {
+      "description": "Enable flash swap functionality",
+      "value": "true"
+    },
+    "VITE_ENABLE_BRIDGE": {
+      "description": "Enable bridge functionality",
+      "value": "true"
+    },
+    "VITE_ENABLE_ANALYTICS": {
+      "description": "Enable analytics tracking",
+      "value": "true"
+    },
+    "VITE_DEBUG": {
+      "description": "Enable debug mode",
+      "value": "false"
+    }
+  },
+  "build": {
+    "env": {
+      "NODE_VERSION": "20"
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
